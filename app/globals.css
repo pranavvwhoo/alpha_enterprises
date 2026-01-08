@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom colors */
+:root {
+  --primary: #008080; /* Teal */
+  --secondary: #f0f9f0; /* Soft Green */
+  --accent: #fbbf24; /* Light Orange */
+}
+
+body {
+  background-color: var(--secondary);
+}
