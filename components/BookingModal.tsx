@@ -61,10 +61,10 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   }
 
   const initiatePayment = () => {
-    const amount = bookingData.coach?.price || 2500 // Default amount
+    const amount = bookingData.coach?.price || 2500 // Amount in rupees
     const options = {
       key: 'rzp_test_S13uikHbXNyeph',
-      amount: amount,
+      amount: amount * 100, // Convert to paise
       currency: 'INR',
       name: 'Alpha Enterprises',
       description: `Appointment with ${bookingData.coach?.name}`,

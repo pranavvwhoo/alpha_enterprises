@@ -3,7 +3,7 @@
 const pricingPlans = [
   {
     name: 'Basic Consultation',
-    price: 2500, // in paise
+    price: 2500, // in rupees
     displayPrice: '₹2,500',
     duration: '1 Session',
     features: [
@@ -69,7 +69,7 @@ const products = [
 function initiatePayment(amount: number, description: string) {
   const options = {
     key: 'rzp_test_S13uikHbXNyeph', // Your Razorpay test key
-    amount: amount, // Amount in paise
+    amount: amount * 100, // Amount in paise
     currency: 'INR',
     name: 'Alpha Enterprises',
     description: description,
