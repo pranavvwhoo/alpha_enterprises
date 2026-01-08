@@ -68,7 +68,7 @@ const products = [
 
 function initiatePayment(amount: number, description: string) {
   const options = {
-    key: 'rzp_test_S13uikHbXNyeph', // Your Razorpay test key
+    key: 'rzp_live_S1OBgRIU2RJzSd', // Your Razorpay test key
     amount: amount * 100, // Amount in paise
     currency: 'INR',
     name: 'Alpha Enterprises',

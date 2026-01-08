@@ -63,7 +63,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const initiatePayment = () => {
     const amount = bookingData.coach?.price || 2500 // Amount in rupees
     const options = {
-      key: 'rzp_test_S13uikHbXNyeph',
+      key: 'rzp_live_S1OBgRIU2RJzSd',
       amount: amount * 100, // Convert to paise
       currency: 'INR',
       name: 'Alpha Enterprises',
