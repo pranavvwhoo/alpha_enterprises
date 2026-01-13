@@ -133,24 +133,7 @@ export default function Pricing() {
           </div>
         </section>
 
-        <section>
-          <h2 className="text-3xl font-semibold text-center mb-8 text-teal-600">Health Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <div className="text-2xl font-bold text-teal-600 mb-4">{product.displayPrice}</div>
-                <button
-                  onClick={() => initiatePayment(product.price, `${product.name} - ${product.displayPrice}`)}
-                  className="w-full bg-orange-400 text-white py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors"
-                >
-                  Buy Now
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
+       
       </div>
     </div>
   )
