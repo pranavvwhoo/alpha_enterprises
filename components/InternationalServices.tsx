@@ -1,16 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  Users, 
-  Target, 
-  Crown, 
-  Zap, 
-  Scale, 
-  Activity, 
-  Heart, 
-  Calendar, 
-  Star, 
+import {
+  Users,
+  Target,
+  Crown,
+  Zap,
+  Scale,
+  Activity,
+  Heart,
+  Calendar,
+  Star,
   PlayCircle,
   CheckCircle2,
   Clock,
@@ -187,12 +187,12 @@ export default function InternationalServices() {
           color: "#8b5cf6",
         },
         modal: {
-          ondismiss: function() {
+          ondismiss: function () {
             console.log("Checkout form closed");
           }
         }
       };
-      
+
       try {
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
@@ -227,7 +227,7 @@ export default function InternationalServices() {
               Premium International Wellness Programs
             </h2>
             <p className="text-xl text-slate-400 font-medium">
-              Specifically curated for our US & International Clients. 
+              Specifically curated for our US & International Clients.
               <span className="text-slate-200 ml-2 font-semibold">Exclusively priced in USD ($).</span>
             </p>
           </motion.div>
@@ -247,7 +247,7 @@ export default function InternationalServices() {
               <div className="h-full glass-card p-8 flex flex-col justify-between overflow-hidden relative">
                 {/* Background Sparkle */}
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${program.color} blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity`}></div>
-                
+
                 <div>
                   <div className="flex justify-between items-start mb-6">
                     <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
@@ -304,8 +304,8 @@ export default function InternationalServices() {
             <span className="text-xs uppercase tracking-widest font-semibold text-slate-400">Legal Disclaimer</span>
           </div>
           <p className="text-slate-500 text-sm leading-relaxed italic">
-            "This program provides lifestyle coaching and educational wellness guidance. 
-            It does not provide medical treatment, diagnosis, or replace professional medical advice."
+            &quot;This program provides lifestyle coaching and educational wellness guidance.
+            It does not provide medical treatment, diagnosis, or replace professional medical advice.&quot;
           </p>
         </motion.div>
       </div>
