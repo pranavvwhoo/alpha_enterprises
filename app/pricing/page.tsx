@@ -1,139 +1,150 @@
 'use client'
 
+import { motion } from 'framer-motion'
+import { Check, Zap, Crown, Star } from 'lucide-react'
+
 const pricingPlans = [
   {
-    name: 'Basic Consultation',
-    price: 2500, // in rupees
+    name: 'Basic Strategist',
+    price: 2500,
     displayPrice: '₹2,500',
-    duration: '1 Session',
+    duration: 'Single Session',
     features: [
-      'Initial health assessment',
-      'Personalized diet plan',
-      'Basic exercise guidance',
-      'Email support for 1 week'
+      'Initial biophysical assessment',
+      'Custom macro-nutrient protocol',
+      'Foundational movement guide',
+      '7-day digital concierge'
     ],
+    icon: Zap,
+    color: 'from-blue-500/20 to-cyan-500/20',
     popular: false
   },
   {
-    name: 'Standard Package',
+    name: 'Elite Transformation',
     price: 8000,
     displayPrice: '₹8,000',
-    duration: '1 Month',
+    duration: '30-Day Intensive',
     features: [
-      'Weekly consultations',
-      'Customized nutrition plan',
-      'Fitness program design',
-      'Progress tracking',
-      '24/7 chat support'
+      'Weekly architectural audits',
+      'Precision nutrition engineering',
+      'Performance programming',
+      'Real-time data monitoring',
+      '24/7 priority encrypted chat'
     ],
+    icon: Star,
+    color: 'from-violet-500/20 to-purple-500/20',
     popular: true
   },
   {
-    name: 'Premium Wellness',
+    name: 'Mastery Protocol',
     price: 15000,
     displayPrice: '₹15,000',
-    duration: '3 Months',
+    duration: '90-Day Mastery',
     features: [
-      'Bi-weekly consultations',
-      'Advanced health monitoring',
-      'Holistic wellness plan',
-      'Lifestyle coaching',
-      'Priority support',
-      'Progress reports'
+      'Bi-weekly deep-dive sessions',
+      'Advanced metabolic tracking',
+      'Holistic longevity roadmap',
+      'Executive lifestyle design',
+      'Ultra-priority status',
+      'Quarterly performance reports'
     ],
+    icon: Crown,
+    color: 'from-emerald-500/20 to-teal-500/20',
     popular: false
   }
 ]
 
-const products = [
-  {
-    name: 'Organic Protein Powder',
-    price: 1200,
-    displayPrice: '₹1,200',
-    description: 'High-quality plant-based protein supplement'
-  },
-  {
-    name: 'Vitamin D3 Capsules',
-    price: 800,
-    displayPrice: '₹800',
-    description: 'Essential vitamin for bone health and immunity'
-  },
-  {
-    name: 'Herbal Detox Tea',
-    price: 600,
-    displayPrice: '₹600',
-    description: 'Natural detox blend for cleansing and wellness'
+function handlePayment(amount: number, description: string) {
+  if (typeof window !== 'undefined' && (window as any).Razorpay) {
+    const options = {
+      key: 'rzp_live_S1OBgRIU2RJzSd',
+      amount: amount * 100,
+      currency: 'INR',
+      name: 'Alpha Enterprises',
+      description: description,
+      handler: function (response: any) {
+        alert('Payment Complete! Reference ID: ' + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: 'Elite Client',
+        email: 'client@alpha-enterprises.com',
+      },
+      theme: {
+        color: '#8b5cf6'
+      }
+    };
+    const rzp = new (window as any).Razorpay(options);
+    rzp.open();
   }
-]
-
-function initiatePayment(amount: number, description: string) {
-  const options = {
-    key: 'rzp_live_S1OBgRIU2RJzSd', // Your Razorpay test key
-    amount: amount * 100, // Amount in paise
-    currency: 'INR',
-    name: 'Alpha Enterprises',
-    description: description,
-    image: '/logo.png', // Optional logo
-    handler: function (response: any) {
-      alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
-      // Here you would typically send the payment details to your backend
-    },
-    prefill: {
-      name: 'Customer Name',
-      email: 'customer@example.com',
-      contact: '9999999999'
-    },
-    notes: {
-      address: 'Corporate Office'
-    },
-    theme: {
-      color: '#008080' // Teal color
-    }
-  };
-
-  const rzp = new (window as any).Razorpay(options);
-  rzp.open();
 }
 
 export default function Pricing() {
   return (
-    <div className="py-16 bg-gray-50">
+    <div className="pt-32 pb-24 bg-[#05070a] min-h-screen">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">Pricing</h1>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 premium-gradient-text tracking-tight">Investment Plans</h1>
+          <p className="text-slate-400 max-w-2xl mx-auto text-xl leading-relaxed">
+            Choose the architecture that best fits your transformation goals.
+          </p>
+        </motion.div>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8 text-teal-600">Coaching Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className={`bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${plan.popular ? 'border-2 border-teal-500 relative' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-2xl font-bold mb-4 text-teal-600">{plan.name}</h3>
-                <div className="text-4xl font-bold text-gray-800 mb-2">{plan.displayPrice}</div>
-                <p className="text-gray-600 mb-6">{plan.duration}</p>
-                <ul className="space-y-2 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {pricingPlans.map((plan, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className={`relative h-full group ${plan.popular ? 'md:scale-105 z-10' : ''}`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-1 rounded-full text-xs font-black tracking-widest uppercase z-20 shadow-lg shadow-violet-500/20">
+                  Most Preferred
+                </div>
+              )}
+              
+              <div className={`h-full glass-card p-10 flex flex-col items-center text-center overflow-hidden relative border-white/10 ${plan.popular ? 'ring-2 ring-violet-500/50' : ''}`}>
+                <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${plan.color}`}></div>
+                
+                <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
+                  <plan.icon className="w-10 h-10 text-violet-400" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                <div className="mb-6">
+                  <span className="text-4xl md:text-5xl font-black text-white">{plan.displayPrice}</span>
+                  <p className="text-slate-500 mt-2 text-sm uppercase tracking-widest font-bold">{plan.duration}</p>
+                </div>
+
+                <ul className="space-y-4 mb-10 text-left w-full">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>
+                    <li key={i} className="flex items-center text-slate-400 text-sm gap-3">
+                      <Check className="w-5 h-5 text-emerald-400 shrink-0" />
                       {feature}
                     </li>
                   ))}
                 </ul>
+
                 <button
-                  onClick={() => initiatePayment(plan.price, `${plan.name} - ${plan.displayPrice}`)}
-                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${plan.popular ? 'bg-teal-600 text-white hover:bg-teal-700' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                  onClick={() => handlePayment(plan.price, plan.name)}
+                  className={`w-full py-4 px-8 rounded-xl font-bold transition-all duration-300 ${
+                    plan.popular 
+                    ? 'premium-button shadow-lg shadow-violet-500/20' 
+                    : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                  }`}
                 >
-                  Book Now
+                  Secure Access
                 </button>
               </div>
-            ))}
-          </div>
-        </section>
-
-       
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   )

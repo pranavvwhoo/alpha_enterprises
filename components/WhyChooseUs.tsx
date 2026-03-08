@@ -1,24 +1,60 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { ShieldCheck, Target, Microchip, HeartPulse } from 'lucide-react'
+
 const reasons = [
-  { title: 'Certified Coaches', description: 'Our coaches are certified professionals with years of experience.' },
-  { title: 'Personalized Plans', description: 'Tailored programs designed specifically for your needs.' },
-  { title: 'Science-Based Approach', description: 'Evidence-based methods for real results.' },
-  { title: 'Holistic Wellness', description: 'Comprehensive care for mind, body, and spirit.' },
+  { 
+    title: 'Certified Mastery', 
+    description: 'Our coaches hold elite international certifications and decades of collective experience.',
+    icon: ShieldCheck,
+    color: 'text-violet-400'
+  },
+  { 
+    title: 'Bespoke Blueprint', 
+    description: 'We don&apos;t do templates. Every plan is a hand-crafted strategy for your specific biology.',
+    icon: Target,
+    color: 'text-emerald-400'
+  },
+  { 
+    title: 'Precision Science', 
+    description: 'Evidence-based methodologies merged with the latest in performance coaching tech.',
+    icon: Microchip,
+    color: 'text-blue-400'
+  },
+  { 
+    title: 'Total Vitality', 
+    description: 'A comprehensive approach that masters the synergy of mind, body, and spirit.',
+    icon: HeartPulse,
+    color: 'text-rose-400'
+  },
 ]
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Us</h2>
+    <section className="py-24 bg-[#05070a] relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 premium-gradient-text tracking-tight">The Alpha Distinction</h2>
+          <p className="text-slate-400 text-lg">Why industry leaders and high-performers trust us with their health.</p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
-            <div key={index} className="text-center">
-              <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✓</span>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="text-center p-8 rounded-3xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors group"
+            >
+              <div className={`w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-8 group-hover:rotate-6 transition-transform ${reason.color}`}>
+                <reason.icon className="w-10 h-10" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-teal-600">{reason.title}</h3>
-              <p className="text-gray-600">{reason.description}</p>
-            </div>
+              <h3 className="text-xl font-bold mb-4 text-white">{reason.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{reason.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -2,13 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom colors */
 :root {
-  --primary: #008080; /* Teal */
-  --secondary: #f0f9f0; /* Soft Green */
-  --accent: #fbbf24; /* Light Orange */
+  --primary: #c4b5fd; /* Soft Violet */
+  --accent: #10b981;  /* Emerald */
+  --luxury-gold: #fbbf24;
+  --bg-dark: #0a0f16;
+  --bg-darker: #05070a;
+  --text-light: #f8fafc;
+  --text-muted: #94a3b8;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-body {
-  background-color: var(--secondary);
+@layer base {
+  body {
+    @apply bg-[#05070a] text-slate-200 antialiased selection:bg-violet-500/30 selection:text-violet-200;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
 }
+
+@layer components {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+  
+  .glass-card-hover {
+    @apply hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500;
+  }
+
+  .premium-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-violet-200 via-slate-100 to-emerald-200;
+  }
+
+  .premium-button {
+    @apply relative overflow-hidden px-6 py-3 rounded-xl font-semibold transition-all duration-300
+           bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500
+           shadow-lg shadow-violet-500/20 active:scale-95;
+  }
+
+  .premium-border-gradient {
+    position: relative;
+  }
+
+  .premium-border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(to right, #8b5cf6, #10b981);
+    border-radius: inherit;
+    z-index: -1;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.gradient-bg-animate {
+  background: linear-gradient(-45deg, #05070a, #0c121d, #05070a, #0a1118);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
