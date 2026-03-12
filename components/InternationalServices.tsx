@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Users,
@@ -15,13 +16,16 @@ import {
   CheckCircle2,
   Clock,
   Video,
-  MessagesSquare
+  MessagesSquare,
+  AlertCircle
 } from 'lucide-react'
 
 const programs = [
   {
+    id: 'p1',
     title: "1. Private Health & Lifestyle Consultation",
-    price: "$100 – $250",
+    minPrice: 100,
+    maxPrice: 250,
     duration: "30–45 minute session",
     platform: "WhatsApp or Zoom",
     includes: [
@@ -34,8 +38,10 @@ const programs = [
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
+    id: 'p2',
     title: "2. 30-Day Men's Personal Transformation Program",
-    price: "$250 – $700",
+    minPrice: 250,
+    maxPrice: 700,
     duration: "30 Days",
     includes: [
       "Goal setting",
@@ -48,8 +54,10 @@ const programs = [
     color: "from-orange-500/20 to-red-500/20"
   },
   {
+    id: 'p3',
     title: "3. VIP Private Mentorship Program",
-    price: "$700 – $1000",
+    minPrice: 700,
+    maxPrice: 1000,
     duration: "3 Months",
     includes: [
       "1-on-1 mentorship for 3 months",
@@ -62,8 +70,10 @@ const programs = [
     color: "from-purple-500/20 to-pink-500/20"
   },
   {
+    id: 'p4',
     title: "4. 90-Day Total Health Transformation Program",
-    price: "$2,000 – $3,500",
+    minPrice: 2000,
+    maxPrice: 3500,
     duration: "90 Days",
     includes: [
       "Personalized diet plan",
@@ -77,8 +87,10 @@ const programs = [
     color: "from-yellow-500/20 to-amber-500/20"
   },
   {
+    id: 'p5',
     title: "5. Elite 6-Month Weight Loss Coaching Program",
-    price: "$3,000 – $5,000",
+    minPrice: 3000,
+    maxPrice: 5000,
     duration: "6 Months",
     includes: [
       "Custom meal plans",
@@ -92,8 +104,10 @@ const programs = [
     color: "from-emerald-500/20 to-teal-500/20"
   },
   {
+    id: 'p6',
     title: "6. Men’s Vitality & Performance Optimization Program",
-    price: "$2,500 – $5,000",
+    minPrice: 2500,
+    maxPrice: 5000,
     duration: "Focus on Performance",
     includes: [
       "Lifestyle guidance for men’s vitality",
@@ -106,8 +120,10 @@ const programs = [
     color: "from-indigo-500/20 to-blue-500/20"
   },
   {
+    id: 'p7',
     title: "7. 6-Month Longevity & Healthy Aging Coaching Program",
-    price: "$3,000 – $7,000",
+    minPrice: 3000,
+    maxPrice: 7000,
     duration: "6 Months",
     includes: [
       "Longevity diet plan",
@@ -120,8 +136,10 @@ const programs = [
     color: "from-rose-500/20 to-orange-500/20"
   },
   {
+    id: 'p8',
     title: "8. 1-Year Lifestyle Transformation & Performance Program",
-    price: "$5,000 – $8,000",
+    minPrice: 5000,
+    maxPrice: 8000,
     duration: "1 Year",
     includes: [
       "Quarterly coaching sessions",
@@ -134,8 +152,10 @@ const programs = [
     color: "from-teal-500/20 to-emerald-500/20"
   },
   {
+    id: 'p9',
     title: "9. VIP Personal Health Coaching – Annual Program",
-    price: "$10,000 per year",
+    minPrice: 10000,
+    maxPrice: 10000,
     duration: "Annual Access",
     includes: [
       "Unlimited consultations",
@@ -148,8 +168,10 @@ const programs = [
     color: "from-violet-500/20 to-fuchsia-500/20"
   },
   {
+    id: 'p10',
     title: "10. Digital Course + Coaching Package",
-    price: "$2,000 – $4,000",
+    minPrice: 2000,
+    maxPrice: 4000,
     duration: "Blended Learning",
     includes: [
       "Recorded health course",
@@ -164,15 +186,19 @@ const programs = [
 ]
 
 export default function InternationalServices() {
-  const handlePayment = (programName: string, priceString: string) => {
-    // Extract minimum numeric value from price string like "$100 – $250"
-    const amountMatch = priceString.match(/\d+(?:,\d+)*/);
-    const amount = amountMatch ? parseInt(amountMatch[0].replace(/,/g, '')) : 100;
+  const [selectedPrices, setSelectedPrices] = useState<Record<string, 'min' | 'max'>>(
+    Object.fromEntries(programs.map(p => [p.id, 'min']))
+  );
 
+  const togglePrice = (id: string, type: 'min' | 'max') => {
+    setSelectedPrices(prev => ({ ...prev, [id]: type }));
+  };
+
+  const handlePayment = (programName: string, amount: number) => {
     if (typeof window !== 'undefined' && (window as any).Razorpay) {
       const options = {
         key: "rzp_live_S1OBgRIU2RJzSd",
-        amount: amount * 100, // USD centers (same as paise logic but for dollars)
+        amount: amount * 100, // USD cents
         currency: "USD",
         name: "Alpha Enterprises",
         description: programName,
@@ -226,7 +252,16 @@ export default function InternationalServices() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 premium-gradient-text tracking-tight">
               Premium International Wellness Programs
             </h2>
-            <p className="text-xl text-slate-400 font-medium">
+            
+            {/* New Disclaimer Added Here */}
+            <div className="mb-10 p-4 border border-rose-500/30 bg-rose-500/5 rounded-2xl inline-block max-w-2xl">
+              <p className="text-rose-400 text-xs md:text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+                <AlertCircle className="w-4 h-4" />
+                THE PROGRAM PROVIDES LIFESTYLE COACHING AND EDUCATIONAL GUIDANCE AND DOES NOT REPLACE MEDICAL ADVICE
+              </p>
+            </div>
+
+            <p className="text-xl text-slate-400 font-medium mt-4">
               Specifically curated for our US & International Clients.
               <span className="text-slate-200 ml-2 font-semibold">Exclusively priced in USD ($).</span>
             </p>
@@ -234,80 +269,91 @@ export default function InternationalServices() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {programs.map((program, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group relative"
-            >
-              <div className="h-full glass-card p-8 flex flex-col justify-between overflow-hidden relative">
-                {/* Background Sparkle */}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${program.color} blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity`}></div>
+          {programs.map((program, index) => {
+            const isSelected = selectedPrices[program.id] === 'max';
+            const currentPrice = isSelected ? program.maxPrice : program.minPrice;
+            const hasRange = program.minPrice !== program.maxPrice;
 
-                <div>
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                      <program.icon className="w-8 h-8 text-violet-400" />
+            return (
+              <motion.div
+                key={program.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="group relative"
+              >
+                <div className="h-full glass-card p-8 flex flex-col justify-between overflow-hidden relative border-white/10 group-hover:border-violet-500/30 transition-all duration-500">
+                  {/* Background Sparkle */}
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${program.color} blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity`}></div>
+
+                  <div>
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                        <program.icon className="w-8 h-8 text-violet-400" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-medium text-slate-400 mb-1 flex items-center justify-end gap-1">
+                          <Clock className="w-3 h-3" /> {program.duration}
+                        </div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                          ${currentPrice.toLocaleString()}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium text-slate-400 mb-1 flex items-center justify-end gap-1">
-                        <Clock className="w-3 h-3" /> {program.duration}
+
+                    <h3 className="text-xl font-bold text-white mb-6 group-hover:text-violet-300 transition-colors h-14">
+                      {program.title}
+                    </h3>
+
+                    {/* Price Selector */}
+                    {hasRange && (
+                      <div className="flex bg-white/5 p-1 rounded-xl mb-8 border border-white/10">
+                        <button
+                          onClick={() => togglePrice(program.id, 'min')}
+                          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${!isSelected ? 'bg-violet-500 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'}`}
+                        >
+                          Standard (${program.minPrice.toLocaleString()})
+                        </button>
+                        <button
+                          onClick={() => togglePrice(program.id, 'max')}
+                          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${isSelected ? 'bg-violet-500 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'}`}
+                        >
+                          Premium (${program.maxPrice.toLocaleString()})
+                        </button>
                       </div>
-                      <div className="text-2xl font-bold text-white tracking-tight">
-                        {program.price}
-                      </div>
+                    )}
+
+                    <div className="space-y-4 mb-8">
+                      {program.includes.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                          <span className="text-slate-300 text-sm leading-relaxed">{item}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-6 group-hover:text-violet-300 transition-colors">
-                    {program.title}
-                  </h3>
-
-                  <div className="space-y-4 mb-8">
-                    {program.includes.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                        <span className="text-slate-300 text-sm leading-relaxed">{item}</span>
-                      </div>
-                    ))}
+                  <div className="mt-auto">
+                    <button
+                      onClick={() => handlePayment(program.title, currentPrice)}
+                      className="w-full premium-button group/btn py-4"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {program.buttonText} 
+                        <span className="text-xs opacity-60">(${currentPrice.toLocaleString()})</span>
+                      </span>
+                      <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
+                    </button>
                   </div>
                 </div>
-
-                <div className="mt-auto">
-                  <button
-                    onClick={() => handlePayment(program.title, program.price)}
-                    className="w-full premium-button group/btn"
-                  >
-                    <span className="relative z-10">{program.buttonText}</span>
-                    <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
 
-
-        {/* Legal Disclaimer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-20 pt-10 border-t border-white/5 text-center max-w-3xl mx-auto"
-        >
-          <div className="inline-flex items-center justify-center p-2 mb-4 rounded-full bg-slate-900 border border-slate-800 text-slate-500">
-            <Activity className="w-4 h-4 mr-2" />
-            <span className="text-xs uppercase tracking-widest font-semibold text-slate-400">Legal Disclaimer</span>
-          </div>
-          <p className="text-slate-500 text-sm leading-relaxed italic">
-            &quot;This program provides lifestyle coaching and educational wellness guidance.
-            It does not provide medical treatment, diagnosis, or replace professional medical advice.&quot;
-          </p>
-        </motion.div>
+        {/* Removed bottom disclaimer as it's now at the top */}
       </div>
     </section>
   )
