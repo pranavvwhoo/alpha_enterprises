@@ -9,7 +9,6 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
 })
-
 export const metadata: Metadata = {
   title: 'Alpha Enterprises - Healthcare & Lifestyle Coaching',
 
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    google: 'google688fa1835356b5ff',
+    google: "pMZGLC_Q2Tp-GrzTVVcxvphspOORZiXvTUKiC6uOW0k",
   },
 
   openGraph: {
