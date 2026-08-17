@@ -51,7 +51,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
                 <User className="w-4 h-4" />
-                <span>Roshan Singh</span>
+                <span>Roshan Sandeep Singh</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4" />

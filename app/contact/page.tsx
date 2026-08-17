@@ -56,7 +56,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 uppercase font-black tracking-widest">Name</p>
-                    <p className="text-white font-medium">Roshan Singh</p>
+                    <p className="text-white font-medium">Roshan Sandeep Singh</p>
                   </div>
                 </div>
 
