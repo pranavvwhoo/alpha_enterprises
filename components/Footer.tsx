@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter ,User} from 'lucide-react'
+import Contact from '@/app/contact/page'
 
 export default function Footer() {
   return (
@@ -49,6 +50,10 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Contact</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
+                <User className="w-4 h-4" />
+                <span>Roshan Singh</span>
+              </li>
+              <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4" />
                 <span>singhroshan2110@gmail.com</span>
               </li>
@@ -57,8 +62,8 @@ export default function Footer() {
                 <span>+91 97698 81160</span>
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="w-4 h-4" />
-                <span>Mumbai, India / Global</span>
+                <MapPin className="w-7 h-7" />
+                <span>Unit No 1, Yadav Nagar, Kherani Road, Sakinaka, Mumbai-400072</span>
               </li>
             </ul>
           </div>

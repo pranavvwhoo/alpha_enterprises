@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, MessageSquare, User} from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -49,6 +49,17 @@ export default function Contact() {
               </h2>
               
               <div className="space-y-6">
+
+                <div className="flex items-center gap-6 group">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
+                    <User className="w-6 h-6 text-yellow-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase font-black tracking-widest">Name</p>
+                    <p className="text-white font-medium">Roshan Singh</p>
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-6 group">
                   <div className="p-3 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
                     <Mail className="w-6 h-6 text-emerald-400" />
@@ -75,7 +86,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 uppercase font-black tracking-widest">Headquarters</p>
-                    <p className="text-white font-medium">Premium Digital Concierge, Global</p>
+                    <p className="text-white font-medium">Unit No 1, Yadav Nagar, Kherani Road, Sakinaka, Mumbai-400072</p>
                   </div>
                 </div>
               </div>
