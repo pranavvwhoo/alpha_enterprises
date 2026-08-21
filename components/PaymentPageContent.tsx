@@ -17,6 +17,9 @@ export default function PaymentPageContent({
             α
           </div>
         </div>
+        <p className="mb-4 text-lg font-bold tracking-tight text-white">
+          Alpha Enterprises
+        </p>
         <h1 className="premium-gradient-text mb-3 text-2xl font-bold md:text-3xl">
           {title}
         </h1>
