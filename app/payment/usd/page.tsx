@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 }
 
 export default function UsdPaymentPage() {
-  return <PaymentPageContent title={config.title} pbId={config.pbId} />
+  return <PaymentPageContent pbId={config.pbId} />
 }
