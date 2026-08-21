@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter ,User} from 'lucide-react'
-import Contact from '@/app/contact/page'
+import { Mail, Phone, MapPin, Instagram, Linkedin, Twitter, User } from 'lucide-react'
+import PaymentLinksDropdown from './PaymentLinksDropdown'
 
 export default function Footer() {
   return (
@@ -71,7 +71,10 @@ export default function Footer() {
 
         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium uppercase tracking-widest transition-colors">
           <p>&copy; 2026 Alpha Enterprises. All Rights Reserved.</p>
-          <p className="text-slate-600 hover:text-slate-400 cursor-default">Designed for Excellence.</p>
+          <div className="flex items-center gap-6 normal-case tracking-normal">
+            <PaymentLinksDropdown />
+            <p className="text-slate-600 hover:text-slate-400 cursor-default uppercase tracking-widest">Designed for Excellence.</p>
+          </div>
         </div>
       </div>
     </footer>

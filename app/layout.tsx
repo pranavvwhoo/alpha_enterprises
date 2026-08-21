@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import LayoutWrapper from '../components/LayoutWrapper'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -80,11 +79,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   )
